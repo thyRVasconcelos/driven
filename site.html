@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz do Futuro</title>
+    <style>
+      body {
+        background: #121c21;
+        color: #ffffff;
+        font-family: sans-serif;
+        display: flex;
+
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        height: 100vh;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 24px;
+      }
+      button {
+        width: 100%;
+        font-size: 24px;
+        margin-bottom: 20px;
+        background: #121c21;
+        color: #ffffff;
+        text-align: left;
+        border: 4px solid;
+        border-image-slice: 1;
+        border-image-source: linear-gradient(
+          0deg,
+          #f7dc11 0%,
+          #f0a81a 25%,
+          #e4801d 50%,
+          #d85116 75%,
+          #b50d13 100%
+        );
+        padding: 18px 15px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: linear-gradient(
+          0deg,
+          #f7dc11 0%,
+          #f0a81a 25%,
+          #e4801d 50%,
+          #d85116 75%,
+          #b50d13 100%
+        );
+      }
+      p {
+        font-size: 24px;
+      }
+      .escondido {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="img/logo-quiz-do-futuro.png" alt="logo" />
+
+    <div class="pergunta-1" onclick="checarResposta(event)">
+      <h1>PARA TRABALHAR COM PROGRAMAÇÃO, EU PRECISO:</h1>
+
+      <button>Ser uma pessoa boa em matematica</button>
+      <button>Ter usado computadores desde crianca e jogar video games</button>
+      <button class="opcao-Certa">
+        Gostar de resolver problemas e trabalhar em equipes
+      </button>
+    </div>
+
+    <div class="pergunta-2 escondido" onclick="checarResposta(event)">
+      <h1>PARA TRABALHAR COM PROGRAMAÇÃO, EU PRECISO: 2</h1>
+
+      <button>Ser uma pessoa boa em matematica</button>
+      <button>Ter usado computadores desde crianca e jogar video games</button>
+      <button class="opcao-Certa">
+        Gostar de resolver problemas e trabalhar em equipes
+      </button>
+    </div>
+
+    <div class="pergunta-3 escondido" onclick="checarResposta(event)">
+      <h1>PARA TRABALHAR COM PROGRAMAÇÃO, EU PRECISO: 3</h1>
+
+      <button>Ser uma pessoa boa em matematica</button>
+      <button>Ter usado computadores desde crianca e jogar video games</button>
+      <button class="opcao-Certa">
+        Gostar de resolver problemas e trabalhar em equipes
+      </button>
+    </div>
+
+    <div class="pergunta-4 escondido" onclick="checarResposta(event)">
+      <h1>PARA TRABALHAR COM PROGRAMAÇÃO, EU PRECISO: 4</h1>
+
+      <button>Ser uma pessoa boa em matematica</button>
+      <button>Ter usado computadores desde crianca e jogar video games</button>
+      <button class="opcao-Certa">
+        Gostar de resolver problemas e trabalhar em equipes
+      </button>
+    </div>
+
+    <div class="pergunta-5 escondido" onclick="checarResposta(event)">
+      <h1>PARA TRABALHAR COM PROGRAMAÇÃO, EU PRECISO: 5</h1>
+
+      <button>Ser uma pessoa boa em matematica</button>
+      <button>Ter usado computadores desde crianca e jogar video games</button>
+      <button class="opcao-Certa">
+        Gostar de resolver problemas e trabalhar em equipes
+      </button>
+    </div>
+
+    <div class="resultado escondido">
+      <h1>PARABÉNS</h1>
+
+      <h1>VOCÊ ACERTOU <span class="acertos"></span> DE 5 PERGUNTAS</h1>
+      <button onclick="voltarParaOFuturo()">Voltar para o início</button>
+    </div>
+
+    <p>
+      <strong> <span class="perguntaAtual">1</span> /5</strong>
+    </p>
+  </body>
+  <script>
+    const ultimaPergunta = 5;
+    let quantidadeDeAcertos = 0;
+    let perguntaAtual = 1;
+    function checarResposta(event) {
+      const tagDoElemento = event.target.tagName;
+      if (tagDoElemento !== "BUTTON") {
+        return;
+      }
+      const classeDoBotao = event.target.className;
+      const classeOpcaoCerta = "opcao-Certa";
+
+      if (classeDoBotao === classeOpcaoCerta) {
+        quantidadeDeAcertos++;
+      }
+      const divPerguntaAtual = document.querySelector(
+        ".pergunta-" + perguntaAtual
+      );
+      divPerguntaAtual.classList.add("escondido");
+      perguntaAtual++;
+
+      if (perguntaAtual > ultimaPergunta) {
+        const divResultado = document.querySelector(".resultado");
+        divResultado.classList.remove("escondido");
+
+        const textoAcertos = document.querySelector(".acertos");
+        textoAcertos.innerText = quantidadeDeAcertos;
+        return;
+      }
+
+      const divProximaPergunta = document.querySelector(
+        ".pergunta-" + perguntaAtual
+      );
+      divProximaPergunta.classList.remove("escondido");
+      const textoPerguntaAtual = document.querySelector(".perguntaAtual");
+      textoPerguntaAtual.innerText = perguntaAtual;
+    }
+    function voltarParaOFuturo() {
+      quantidadeDeAcertos = 0;
+      perguntaAtual = 1;
+
+      const divProximaPergunta = document.querySelector(
+        ".pergunta-" + perguntaAtual
+      );
+      divProximaPergunta.classList.remove("escondido");
+
+      const textoPerguntaAtual = document.querySelector(".perguntaAtual");
+      textoPerguntaAtual.innerText = perguntaAtual;
+
+      const divResultado = document.querySelector(".resultado");
+      divResultado.classList.add("escondido");
+    }
+  </script>
+</html>
